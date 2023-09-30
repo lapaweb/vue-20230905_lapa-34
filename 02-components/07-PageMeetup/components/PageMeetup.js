@@ -52,7 +52,7 @@ export default defineComponent({
         try {
           this.meetup = await fetchMeetupById(this.meetupId);
         } catch (error) {
-          this.error = error;
+          this.error = error.message;
         }
       }
     },
@@ -70,7 +70,7 @@ export default defineComponent({
       </UiContainer>
 
       <UiContainer v-else-if="!meetup">
-        <UiAlert> {{ error.message }} </UiAlert>
+        <UiAlert> {{ error }} </UiAlert>
       </UiContainer>
     </div>`,
 });
