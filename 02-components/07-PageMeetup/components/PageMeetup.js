@@ -6,8 +6,7 @@ import MeetupDescription from './MeetupDescription.js';
 import MeetupAgenda from './MeetupAgenda.js';
 import MeetupInfo from './MeetupInfo.js';
 import MeetupView from './MeetupView';
-
-import { fetchMeetupById } from '/Users/lapa/Projects/vue-20230905_lapa-34/02-components/07-PageMeetup/meetupService.js';
+import { fetchMeetupById } from './../meetupService.js';
 
 
 
