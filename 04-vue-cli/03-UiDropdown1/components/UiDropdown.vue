@@ -1,31 +1,113 @@
 <template>
-  <div class="dropdown dropdown_opened">
-    <button type="button" class="dropdown__toggle dropdown__toggle_icon">
-      <UiIcon icon="tv" class="dropdown__icon" />
-      <span>Title</span>
+  <div class="dropdown" :class="{ dropdown_opened:!isActive }">
+    <button 
+      type="button"
+      class="dropdown__toggle"
+      :class="{ dropdown__toggle_icon: availabilityIcon }"
+      @click="toggleShowOptions"
+    >
+      <span v-if="textValue">{{ textValue }} 
+        <UiIcon :icon=iconValue class="dropdown__icon" />
+      </span>
+      <span v-else>{{ title }} </span>
     </button>
 
-    <div class="dropdown__menu" role="listbox">
-      <button class="dropdown__item dropdown__item_icon" role="option" type="button">
-        <UiIcon icon="tv" class="dropdown__icon" />
-        Option 1
-      </button>
-      <button class="dropdown__item dropdown__item_icon" role="option" type="button">
-        <UiIcon icon="tv" class="dropdown__icon" />
-        Option 2
+    <div 
+      class="dropdown__menu" 
+      :class="{ dropdown_opened: isActive }" 
+      role="listbox" 
+      v-show="show"
+    >
+
+      <button 
+        v-for="(option, index) in options" 
+        :key="index"
+        class="dropdown__item" 
+        :class="{ dropdown__item_icon: availabilityIcon }"
+        @click="toggleShowOptions(), $emit('update:modelValue', option.value)"
+        role="option" 
+        type="button"
+      >
+
+        <UiIcon :icon=option.icon class="dropdown__icon" />
+        {{ option.text }}
       </button>
     </div>
+
   </div>
 </template>
 
 <script>
+
 import UiIcon from './UiIcon.vue';
 
 export default {
   name: 'UiDropdown',
 
   components: { UiIcon },
+
+  emits: ['update:modelValue'],
+
+  props: {
+
+    options: {
+      type: Array,
+      required: true,
+      default: function() {
+        return [
+          {     
+            value: '',
+            text: '',
+            icon: ''
+          }
+        ]
+      } 
+    },
+
+    modelValue: {
+      type: String,
+    },
+
+    title: {
+      type: String,
+      required: true,
+    }
+
+  },
+
+
+  data() {
+    return {
+      show: '',
+      isActive: true,
+    }
+  },
+
+  computed: {
+    availabilityIcon() {
+      return this.options.some(({ icon }) => icon !== '' && icon !== undefined)
+    },
+
+    textValue() {
+      const optionValue = this.options.find(option => option.value ==  this.modelValue);
+      return optionValue?.text ?? null;
+    },
+
+    iconValue() {
+      const optionValue = this.options.find(option => option.value ==  this.modelValue);
+      return optionValue?.icon ?? null;
+    },
+
+  },
+  
+  methods: {
+    toggleShowOptions() {
+      this.show = !this.show
+      this.isActive = !this.isActive
+    },
+  }
 };
+
 </script>
 
 <style scoped>
