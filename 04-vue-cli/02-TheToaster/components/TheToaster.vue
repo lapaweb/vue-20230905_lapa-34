@@ -30,6 +30,7 @@ export default {
     success(message) {
       this.couter++;
       const toastIndex = this.couter;
+
       const toast = {
           class : 'toast_success',
           message: message,
@@ -42,6 +43,7 @@ export default {
     error(message) {
       this.couter++;
       const toastIndex = this.couter;
+      
       const toast = {
           class : 'toast_error',
           message: message,
