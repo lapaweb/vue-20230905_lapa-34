@@ -31,7 +31,7 @@ export default {
       this.couter++;
       const toastIndex = this.couter;
       const toast = {
-          toastType : 'success',
+          class : 'toast_success',
           message: message,
           timeout: 5000,
           index: toastIndex
@@ -43,7 +43,7 @@ export default {
       this.couter++;
       const toastIndex = this.couter;
       const toast = {
-          toastType : 'error',
+          class : 'toast_error',
           message: message,
           timeout: 5000,
           index: toastIndex,

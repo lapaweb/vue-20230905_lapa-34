@@ -1,5 +1,5 @@
 <template>
-  <div class="toast" :class="toast.toastType">
+  <div class="toast" :class="toast.class">
     <UiIcon :icon=icon />
     <span>{{ toast.message }}</span>
   </div>
@@ -22,7 +22,7 @@ export default {
       default: function () {
         return { 
           toast: {
-            toastType: '',
+            class: '',
             message: '',
             timeout: 5000,
             index: 0
@@ -34,10 +34,10 @@ export default {
 
   computed: {
     icon() {
-      switch (this.toast.toastType) {
-        case 'success':
+      switch (this.toast.class) {
+        case 'toast_success':
           return 'check-circle';
-        case 'error':
+        case 'toast_error':
           return 'alert-circle';
         default:
           return undefined;
@@ -85,10 +85,10 @@ export default {
   gap: 12px;
 }
 
-.toast.success {
+.toast_success {
   color: var(--green);
 }
-.toast.error {
+.toast_error {
   color: var(--red);
 }
 
