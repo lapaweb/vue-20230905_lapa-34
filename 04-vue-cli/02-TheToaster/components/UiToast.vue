@@ -1,7 +1,7 @@
 <template>
-  <div class="toast" :class="toast.class">
+  <div class="toast" :class="toastClass">
     <UiIcon :icon=icon />
-    <span>{{ toast.message }}</span>
+    <span>{{ message }}</span>
   </div>
 </template>
 
@@ -14,35 +14,38 @@ export default {
 
   components: { UiIcon },
 
-  emits: ['closed'],
+  emits: ['close'],
 
   props: {
-    toast: {
-      type: Object,
-      default: function () {
-        return { 
-          toast: {
-            class: '',
-            message: '',
-            timeout: 5000,
-            index: 0
-          },
-        }
-      }
+    index: {
+      type: Number
+    },
+    class: {
+      type: String
+    },
+    message: {
+      type: String
+    },
+    timeout: {
+      type: Number
     },
   },
 
   computed: {
     icon() {
-      switch (this.toast.class) {
-        case 'toast_success':
+      switch (this.class) {
+        case 'success':
           return 'check-circle';
-        case 'toast_error':
+        case 'error':
           return 'alert-circle';
         default:
           return undefined;
       }
     },
+
+    toastClass() {
+      return this.class
+    }
   },
 
   methods: {
@@ -51,11 +54,10 @@ export default {
       setTimeout(() => {
         this.close();
       }, 
-      this.toast.timeout)
+      this.timeout)
     },
-    
     close() {
-      this.$emit('closed', this.toast.index);
+      this.$emit('close');
     }
   },
 
@@ -85,10 +87,10 @@ export default {
   gap: 12px;
 }
 
-.toast_success {
+.success {
   color: var(--green);
 }
-.toast_error {
+.error {
   color: var(--red);
 }
 

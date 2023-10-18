@@ -1,6 +1,12 @@
 <template>
       <div class="toasts">
-        <UiToast v-for="toast in toasts" :key="toast" :toast="toast" @closed="deleteByIndex"></UiToast>
+        <UiToast 
+          v-for="toast in toasts" 
+          :key="toast.index"
+          :class="toast.class"
+          :message="toast.message"
+          :timeout="toast.timeout"
+          @close="deleteToast(toast.index)"></UiToast>
       </div>
 </template>
 
@@ -30,9 +36,8 @@ export default {
     success(message) {
       this.couter++;
       const toastIndex = this.couter;
-
       const toast = {
-          class : 'toast_success',
+          class : 'success',
           message: message,
           timeout: 5000,
           index: toastIndex
@@ -43,9 +48,9 @@ export default {
     error(message) {
       this.couter++;
       const toastIndex = this.couter;
-      
+
       const toast = {
-          class : 'toast_error',
+          class : 'error',
           message: message,
           timeout: 5000,
           index: toastIndex,
@@ -53,7 +58,7 @@ export default {
 
       this.toasts.push(toast);
     },
-    deleteByIndex(index) {
+    deleteToast(index) {
       const toasts = this.toasts.filter((toast) => toast.index !== index);
       this.toasts = toasts;
     }

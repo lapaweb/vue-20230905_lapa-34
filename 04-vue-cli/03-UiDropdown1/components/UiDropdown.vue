@@ -1,5 +1,5 @@
 <template>
-  <div class="dropdown" :class="{ dropdown_opened:!isActive }">
+  <div class="dropdown" :class="{ dropdown_opened:isActive }">
     <button 
       type="button"
       class="dropdown__toggle"
@@ -7,16 +7,16 @@
       @click="toggleShowOptions"
     >
       <span v-if="textValue">{{ textValue }} 
-        <UiIcon :icon=iconValue class="dropdown__icon" />
+        <UiIcon v-if="iconValue" :icon=iconValue class="dropdown__icon" />
       </span>
       <span v-else>{{ title }} </span>
     </button>
 
     <div 
       class="dropdown__menu" 
-      :class="{ dropdown_opened: isActive }" 
+      :class="{ dropdown_opened: !isActive }" 
       role="listbox" 
-      v-show="show"
+      v-show="isActive"
     >
 
       <button 
@@ -24,12 +24,12 @@
         :key="index"
         class="dropdown__item" 
         :class="{ dropdown__item_icon: availabilityIcon }"
-        @click="toggleShowOptions(), $emit('update:modelValue', option.value)"
+        @click=selectOptionValue(option.value)
         role="option" 
         type="button"
       >
 
-        <UiIcon :icon=option.icon class="dropdown__icon" />
+        <UiIcon v-if="option.icon" :icon=option.icon class="dropdown__icon" />
         {{ option.text }}
       </button>
     </div>
@@ -53,15 +53,6 @@ export default {
     options: {
       type: Array,
       required: true,
-      default: function() {
-        return [
-          {     
-            value: '',
-            text: '',
-            icon: ''
-          }
-        ]
-      } 
     },
 
     modelValue: {
@@ -78,8 +69,7 @@ export default {
 
   data() {
     return {
-      show: '',
-      isActive: true,
+      isActive: false,
     }
   },
 
@@ -102,9 +92,14 @@ export default {
   
   methods: {
     toggleShowOptions() {
-      this.show = !this.show
       this.isActive = !this.isActive
     },
+
+    selectOptionValue(value) {
+      this.toggleShowOptions();
+      this.$emit('update:modelValue', value)
+    }
+
   }
 };
 
