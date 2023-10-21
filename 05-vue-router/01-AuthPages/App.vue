@@ -2,7 +2,9 @@
   <div class="wrapper">
     <MeetupsHeader />
     <main class="main">
-      <div>CURRENT PAGE</div>
+        <RouterView />
+        <!-- <PageIndex /> -->
+      
     </main>
     <MeetupsFooter />
   </div>
@@ -11,6 +13,9 @@
 <script>
 import MeetupsHeader from './components/MeetupsHeader.vue';
 import MeetupsFooter from './components/MeetupsFooter.vue';
+// import PageIndex from '../views/PageIndex.vue'
+// import PageIndex from '../01-AuthPages/views/PageIndex.vue'
+
 
 export default {
   name: 'App',
