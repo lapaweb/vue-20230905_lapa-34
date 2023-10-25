@@ -3,7 +3,7 @@
         <UiToast 
           v-for="toast in toasts" 
           :key="toast.index"
-          :class="toast.class"
+          :type="toast.type"
           :message="toast.message"
           :timeout="toast.timeout"
           @close="deleteToast(toast.index)"></UiToast>
@@ -37,12 +37,11 @@ export default {
       this.couter++;
       const toastIndex = this.couter;
       const toast = {
-          class : 'success',
+          type : 'success',
           message: message,
           timeout: 5000,
           index: toastIndex
         };
-
       this.toasts.push(toast);
     },
     error(message) {
@@ -50,7 +49,7 @@ export default {
       const toastIndex = this.couter;
 
       const toast = {
-          class : 'error',
+          type : 'error',
           message: message,
           timeout: 5000,
           index: toastIndex,

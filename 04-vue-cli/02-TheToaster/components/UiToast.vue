@@ -17,10 +17,7 @@ export default {
   emits: ['close'],
 
   props: {
-    index: {
-      type: Number
-    },
-    class: {
+    type: {
       type: String
     },
     message: {
@@ -33,7 +30,7 @@ export default {
 
   computed: {
     icon() {
-      switch (this.class) {
+      switch (this.type) {
         case 'success':
           return 'check-circle';
         case 'error':
@@ -44,7 +41,14 @@ export default {
     },
 
     toastClass() {
-      return this.class
+      switch (this.type) {
+        case 'success':
+          return 'toast_success';
+        case 'error':
+          return 'toast_error';
+        default:
+          return undefined;
+      }
     }
   },
 
@@ -87,10 +91,10 @@ export default {
   gap: 12px;
 }
 
-.success {
+.toast_success {
   color: var(--green);
 }
-.error {
+.toast_error {
   color: var(--red);
 }
 
