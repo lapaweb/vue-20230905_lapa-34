@@ -13,12 +13,6 @@ export default {
       type: [String, Object],
       default: "RouterLink"
     },
-    to: {
-      type: [String, Object]
-    },
-    href: {
-      type: String
-    }
   },
 
 };

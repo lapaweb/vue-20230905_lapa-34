@@ -1,5 +1,9 @@
 <template>
-  <component :is='tag' class="button" :class="[buttonClass, {button_block:block} ]" :type = buttonType>
+  <component 
+    :is='tag' 
+    class="button" 
+    :class="[buttonClass, {button_block:block} ]" 
+    :type = buttonType>
     
     <slot/>
   </component>
@@ -25,8 +29,6 @@ export default {
       default: false
     },
   },
-
-  $attrs: ['type'],
 
   computed: {
     
