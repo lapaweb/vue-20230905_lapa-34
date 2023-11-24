@@ -4,6 +4,7 @@
       class="image-uploader__preview"  
       :class="{'image-uploader__preview-loading': state==='load'}" 
       :style="previewNew" 
+      @click.stop.prevent=deleteImage()
       >
        <span class="image-uploader__text">{{ inputText }}</span>
         <input 
@@ -12,8 +13,7 @@
          v-bind="$attrs"
          accept="image/*" 
          class="image-uploader__input"
-         @change=attachImage($event)
-         @click=deleteImage()
+         @change=attachImage($event)  
          />
       </label>
    </div>
@@ -56,7 +56,7 @@ export default {
     },
   },
   
-  mounted() {
+  created() {
     this.getDefoultPreview();
   },
   
