@@ -1,5 +1,5 @@
 <template>
-  <fieldset  class="agenda-item-form" >
+  <fieldset class="agenda-item-form" >
     <button type="button" class="agenda-item-form__remove-button" @click="$emit('remove')">
       <UiIcon icon="trash" />
     </button>
