@@ -6,9 +6,11 @@
 </template>
 
 <script>
+import { reactive, toRef, ref } from 'vue';
 import { SensorsDataController } from '../services/SensorsDataController';
 import { SensorsDataStreamingService } from '../services/SensorsDataStreamingService';
 import SensorsDataRow from './SensorsDataRow';
+
 
 export default {
   name: 'SensorsDataView',
@@ -42,10 +44,14 @@ export default {
     },
 
     setData(sensors) {
-      this.sensors = sensors;
+      this.sensors = {};
+      for (const sensorId in sensors) {
+        this.sensors[sensorId] = { ...sensors[sensorId] };
+      }
     },
   },
 };
 </script>
+
 
 <style scoped></style>
