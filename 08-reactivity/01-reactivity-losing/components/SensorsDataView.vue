@@ -6,9 +6,11 @@
 </template>
 
 <script>
+import { reactive, toRef, ref } from 'vue';
 import { SensorsDataController } from '../services/SensorsDataController';
 import { SensorsDataStreamingService } from '../services/SensorsDataStreamingService';
 import SensorsDataRow from './SensorsDataRow';
+
 
 export default {
   name: 'SensorsDataView',
@@ -50,5 +52,6 @@ export default {
   },
 };
 </script>
+
 
 <style scoped></style>
