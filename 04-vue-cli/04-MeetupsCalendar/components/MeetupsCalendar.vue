@@ -2,9 +2,9 @@
   <div class="calendar-view">
     <div class="calendar-view__controls">
       <div class="calendar-view__controls-inner">
-        <button class="calendar-view__control-left" type="button" aria-label="Previous month" @click="getPreviousMonth()"></button>
+        <button class="calendar-view__control-left" type="button" aria-label="Previous month" @click="setPreviousMonth()"></button>
         <div class="calendar-view__date"> {{ currentMonthText }} </div>
-        <button class="calendar-view__control-right" type="button" aria-label="Next month" @click="getNextMonth()"></button>
+        <button class="calendar-view__control-right" type="button" aria-label="Next month" @click="setNextMonth()"></button>
       </div>
     </div>
 
@@ -122,10 +122,10 @@ export default {
     getLengthCurrentMonth() {
       return new Date((this.date).getFullYear(), (this.date).getMonth() + 1, 0).getDate();
     },
-    getNextMonth() {
+    setNextMonth() {
       this.date = new Date((this.date).getFullYear(), (this.date).getMonth() + 1, 1);
     },
-    getPreviousMonth() {
+    setPreviousMonth() {
       this.date = new Date((this.date).getFullYear(), (this.date).getMonth() - 1, 1);
     },
   }
