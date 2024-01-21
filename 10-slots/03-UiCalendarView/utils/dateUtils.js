@@ -41,4 +41,8 @@ export const getFirstDateOfMonth = (date) => makeDate(makeDate(makeDate(date).se
  * @param {Date} date
  * @return {Date}
  */
+<<<<<<< HEAD
 export const getLastDateOfMonth = (date) => addDays(getFirstDateOfMonth(addMonths(date, 1)), -1);
+=======
+export const getLastDateOfMonth = (date) => addDays(getFirstDateOfMonth(addMonths(date, 1)), -1);
+>>>>>>> 9d7d1a951bcd3957889f715549f31ff955b055a2
